@@ -3,14 +3,17 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="relative border-b-2 pb-10 md:pb-0">
-      <Image
-        className="object-cover h-[300px] w-full md:w-full md:h-[650px] p-2 rounded-2xl"
-        src={"/images/splash2.jpg"}
-        alt="splash"
-        width={1900}
-        height={500}
-      ></Image>
+    <div className="relative border-b-2 md:border-b-0 m-2 pb-10 md:pb-5">
+      <div className="h-[250px] md:w-full md:h-[650px] overflow-hidden rounded-2xl   ">
+        <Image
+          src={"/images/splash2.jpg"}
+          alt="splash"
+          layout="responsive"
+          width={1900}
+          height={1650}
+          priority
+        ></Image>
+      </div>
       <div className="md:absolute top-10 md:left-10 md:right-auto right-10 flex-col flex text-yellow-600 text-3xl mt-5 md:mt-0 md:text-6xl items-center">
         We are digital <span>meets fashions</span>
         <div className="flex justify-center items-center mt-4">
