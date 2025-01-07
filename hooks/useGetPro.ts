@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const useGetPro = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const fetchData = async () => {
     try {
       const response = await axios.get(`/api/product`);
