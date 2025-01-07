@@ -1,20 +1,19 @@
 import Image from "next/image";
 import React from "react";
 import { Heart, Search, ShoppingBag } from "lucide-react";
-import ButtonCircle from "./ButtonCircle";
 import Link from "next/link";
 import { NavMenu } from "./NavMenu";
 import SubNavMenu from "./SubNavMenu";
-import UserAvatar from "./UserAvatar";
+import { Button } from "./ui/button";
+import { auth } from "@/auth";
+import ButtonCircle from "./custom/ButtonCircle";
+import UserAvatar from "./custom/UserAvatar";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const session = await auth();
+
   return (
-    <div className="flex rounded-xl h-16 shadow justify-between items-center text-xs font-semibold text-gray-600 p-6  bg-white">
-      {/* <div className="w-1/3 hidden md:flex gap-10  ">
-        <div>New In</div>
-        <div>Category</div>
-        <div>Track Order</div>
-      </div> */}
+    <div className="flex w-full rounded-xl h-16 shadow justify-between items-center text-xs font-semibold text-gray-600 p-6  bg-white">
       <div className="w-1/3 hidden md:flex gap-10  ">
         <NavMenu />
       </div>
@@ -42,7 +41,13 @@ const Navbar = () => {
         <ButtonCircle>
           <ShoppingBag className="w-5 h-5" />
         </ButtonCircle>
-        <UserAvatar />
+        {session?.user?.email ? (
+          <UserAvatar avatarImg={session?.user?.image ?? "/demoavatar.png"} />
+        ) : (
+          <Link href={"/sign-in"}>
+            <Button variant={"outline"}>Đăng nhập</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

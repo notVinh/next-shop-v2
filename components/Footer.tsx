@@ -28,8 +28,8 @@ const Footer = () => {
         </div>
         <div className="w-full md:w-1/3 flex flex-row justify-between px-4">
           <div>
-            <div className="font-bold text-lg mb-4">Product</div>
-            <div className="text-sm font-bold text-gray-400 flex flex-col gap-1 items-center md:items-start">
+            <div className="font-bold text-lg mb-4 text-gray-600">Product</div>
+            <div className="text-sm font-bold text-gray-500 flex flex-col gap-1 items-center md:items-start">
               <div>T-shirt</div>
               <div>Jacket</div>
               <div>Shoes</div>
@@ -38,8 +38,10 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <div className="font-bold text-lg mb-4">Categories</div>
-            <div className="text-sm font-bold text-gray-400 flex flex-col gap-1 items-center md:items-start">
+            <div className="font-bold text-lg mb-4 text-gray-600">
+              Categories
+            </div>
+            <div className="text-sm font-bold text-gray-500 flex flex-col gap-1 items-center md:items-start">
               <div>Man</div>
               <div>Woman</div>
               <div>Kids</div>
@@ -48,8 +50,10 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <div className="font-bold text-lg mb-4">Our Social Media</div>
-            <div className="text-sm font-bold text-gray-400 flex flex-col gap-1 items-center md:items-start">
+            <div className="font-bold text-lg mb-4 text-gray-600">
+              Our Social Media
+            </div>
+            <div className="text-sm font-bold text-gray-500 flex flex-col gap-1 items-center md:items-start">
               <div>Instagram</div>
               <div>Facebook</div>
               <div>Youtube</div>
@@ -59,7 +63,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between bg-gray-400 rounded-full h-8 items-center m-3 p-2">
+      <div className="flex flex-col md:flex-row justify-between bg-gray-600 rounded-full h-8 items-center m-3 p-2">
         <div className="text-sm text-white">
           © 2025 |Nashiesobadly. All Rights Reserved.
         </div>

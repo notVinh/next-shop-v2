@@ -8,7 +8,7 @@ import {
 import { wallImgList } from "@/lib/utils";
 import Image from "next/image";
 
-const Slider = () => {
+const CustomSlider = () => {
   return (
     <Carousel className="w-96 rounded-3xl m-3 overflow-hidden cursor-move">
       <CarouselContent>
@@ -32,4 +32,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default CustomSlider;

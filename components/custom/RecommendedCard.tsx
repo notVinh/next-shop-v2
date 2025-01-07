@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-const TrendingCard = () => {
+const RecommendedCard = () => {
   return (
     <div className="relative">
       <Image
@@ -23,4 +23,4 @@ const TrendingCard = () => {
   );
 };
 
-export default TrendingCard;
+export default RecommendedCard;

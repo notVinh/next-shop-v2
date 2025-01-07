@@ -1,21 +1,18 @@
 import Hero from "@/components/Hero";
-import NewItemSection from "@/components/NewItemSection";
-import RecommenSection from "@/components/RecommenSection";
+import LatestSection from "@/components/LatestSection";
+import RecommendedSection from "@/components/RecommendedSection";
 import TrendingSection from "@/components/TrendingSection";
 
 export default function Home() {
   return (
-    <main className="rounded-xl bg-white w-full">
+    <main className="rounded-xl bg-white w-full min-h-80">
       <section className="mb-10 md:mb-32">
         <Hero />
-        {/* <div>
-          <Slider />
-        </div> */}
       </section>
       <div className="flex flex-col gap-10 md:gap-20">
-        <NewItemSection />
-        <RecommenSection />
+        <LatestSection />
         <TrendingSection />
+        <RecommendedSection />
       </div>
     </main>
   );

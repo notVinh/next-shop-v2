@@ -1,0 +1,55 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
+import { signIn } from "@/auth";
+import SignInForm from "@/components/custom/SignInForm";
+
+const SignIn = () => {
+  return (
+    <div className="h-full w-full pt-16 px-10 ">
+      <div className="w-full text-4xl font-bold text-gray-500">Login</div>
+      <SignInForm />
+      <div className="mt-6">
+        {/* <Separator  /> */}
+
+        <div className="w-full text-xs text-center my-2">or login with</div>
+        <Separator />
+      </div>
+      <div className="flex w-full gap-3 mt-5">
+        <Button
+          variant={"outline"}
+          className="w-full"
+          onClick={async () => {
+            "use server";
+            await signIn("github", { redirectTo: "/" });
+          }}
+        >
+          <Image
+            src={"/icons/github.png"}
+            alt="githubicon"
+            height={20}
+            width={20}
+          ></Image>
+        </Button>
+        <Button
+          variant={"outline"}
+          className="w-full"
+          // onClick={() => {
+          //   //   "use server";
+          //   // signIn("github", { redirectTo: "/" });
+          // }}
+        >
+          <Image
+            src={"/icons/google.png"}
+            alt="googleicon"
+            height={20}
+            width={20}
+          ></Image>
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default SignIn;

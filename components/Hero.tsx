@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React from "react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -17,9 +19,11 @@ const Hero = () => {
       <div className="md:absolute top-10 md:left-10 md:right-auto right-10 flex-col flex text-yellow-600 text-3xl mt-5 md:mt-0 md:text-6xl items-center">
         We are digital <span>meets fashions</span>
         <div className="flex justify-center items-center mt-4">
-          <button className="bg-white text-sm md:text-xl px-5 w-36 py-2 rounded-lg hover:bg-yellow-600 hover:text-white shadow border">
-            Shop now
-          </button>
+          <Link href={"/product"}>
+            <Button className="bg-amber-600 hover:bg-white hover:text-amber-600">
+              Shop now
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="absolute right-20 bottom-10 flex-col xl:flex md:text-white md:text-xl text-slate-700 hidden">

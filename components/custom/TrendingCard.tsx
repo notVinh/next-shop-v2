@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-const RecommenItemCard = () => {
+const TrendingCard = () => {
   return (
     <div className="relative">
       <div className="w-96 h-96 overflow-hidden rounded-2xl">
@@ -22,4 +22,4 @@ const RecommenItemCard = () => {
   );
 };
 
-export default RecommenItemCard;
+export default TrendingCard;

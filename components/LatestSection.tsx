@@ -1,7 +1,7 @@
 import React from "react";
-import NewItemCard from "./NewItemCard";
+import NewItemCard from "./custom/NewItemCard";
 
-const NewItemSection = () => {
+const LatestSection = () => {
   return (
     <section className="flex justify-center items-center flex-col gap-3 border-b-2">
       <div className="uppercase font-bold text-4xl underline">
@@ -23,4 +23,4 @@ const NewItemSection = () => {
   );
 };
 
-export default NewItemSection;
+export default LatestSection;
