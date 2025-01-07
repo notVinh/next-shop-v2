@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/auth";
 
-const UserAvatar = ({ avatarImg }: { avatarImg: string }) => {
+const UserAvatar = ({ avatarImg }: { avatarImg?: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
