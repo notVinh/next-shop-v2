@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
-import useUser from "@/lib/zustand/useUser";
+// import useUser from "@/lib/zustand/useUser";
 import axios from "axios";
 
 const Profile = () => {
-  const { user } = useUser();
+  // const { user } = useUser();
   //   console.log(user);
   useEffect(() => {
     const fetchData = async () => {

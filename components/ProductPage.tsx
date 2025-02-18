@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
 import ProductCard from "./custom/ProductCard";
-import useGetPro from "@/hooks/useGetPro";
+// import useGetPro from "@/hooks/useGetPro";
 import { ProductPropTypes } from "@/constant/type";
 import useProduct from "@/lib/zustand/useProduct";
 import PaginationUi from "./custom/PaginationUi";
 
 const ProductPage = () => {
-  const { isLoading } = useGetPro(1);
+  // const { isLoading } = useGetPro(1);
 
   const { product } = useProduct();
 
