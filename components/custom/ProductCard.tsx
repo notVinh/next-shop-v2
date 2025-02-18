@@ -7,7 +7,7 @@ const ProductCard = ({ data }: { data: ProductPropTypes }) => {
     <div className="flex flex-col justify-center items-center">
       <div className="w-64 h-64 overflow-hidden rounded-lg shadow ">
         <Image
-          src={data.image}
+          src={data?.image || "/images/default-product.png"}
           alt="product"
           width={350}
           height={350}
