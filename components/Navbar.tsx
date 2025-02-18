@@ -1,16 +1,37 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { memo, useEffect } from "react";
 import { Heart, Search, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { NavMenu } from "./NavMenu";
 import SubNavMenu from "./SubNavMenu";
-import { Button } from "./ui/button";
-import { auth } from "@/auth";
+// import { Button } from "./ui/button";
+// import { auth } from "@/auth";
 import ButtonCircle from "./custom/ButtonCircle";
+// import UserAvatar from "./custom/UserAvatar";
+import useUser from "@/lib/zustand/useUser";
 import UserAvatar from "./custom/UserAvatar";
+import { Button } from "./ui/button";
+import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
+// import useUser from "@/lib/zustand/useUser";
 
-const Navbar = async () => {
-  const session = await auth();
+const Navbar = () => {
+  const { setUser, user } = useUser();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      setUser({
+        name: session.user?.name || "",
+        email: session.user?.email || "",
+        avatar: session.user?.image || "",
+        loginMethod: "OAuth",
+      });
+    }
+  }, [session, setUser]);
+
+  // console.log(user);
 
   return (
     <div className="flex w-full rounded-xl h-16 shadow justify-between items-center text-xs font-semibold text-gray-600 p-6  bg-white">
@@ -27,7 +48,7 @@ const Navbar = async () => {
             alt="logo"
             width={30}
             height={30}
-            className=" cursor-pointer"
+            className=" cursor-pointer w-auto h-auto"
           />
         </Link>
       </div>
@@ -41,8 +62,8 @@ const Navbar = async () => {
         <ButtonCircle>
           <ShoppingBag className="w-5 h-5" />
         </ButtonCircle>
-        {session?.user?.email ? (
-          <UserAvatar avatarImg={session?.user?.image ?? "/demoavatar.png"} />
+        {user ? (
+          <UserAvatar data={user} />
         ) : (
           <Link href={"/sign-in"}>
             <Button variant={"outline"}>Đăng nhập</Button>
@@ -53,4 +74,4 @@ const Navbar = async () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

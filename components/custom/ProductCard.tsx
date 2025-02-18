@@ -1,11 +1,11 @@
-import { ProductTypeProps } from "@/constant/type";
+import { ProductPropTypes } from "@/constant/type";
 import Image from "next/image";
 import React from "react";
 
-const ProductCard = ({ data }: { data: ProductTypeProps }) => {
+const ProductCard = ({ data }: { data: ProductPropTypes }) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="w-72 h-72 overflow-hidden rounded-lg shadow ">
+      <div className="w-64 h-64 overflow-hidden rounded-lg shadow ">
         <Image
           src={data.image}
           alt="product"

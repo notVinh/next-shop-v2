@@ -9,11 +9,11 @@ const Footer = () => {
       <div className="mt-3 flex flex-col md:flex-row justify-center items-center gap-10 md:gap-40">
         <div className="w-1/3 flex flex-col justify-center items-center gap-5">
           <Image
-            className="rounded-2xl"
+            className="rounded-2xl w-auto h-auto "
             src={"/logo.png"}
-            alt="pro"
-            width={70}
-            height={70}
+            alt="logo"
+            width={50}
+            height={50}
           ></Image>
           <div className="flex flex-col gap-2 text-gray-500">
             <div>

@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { signIn } from "@/auth";
 import SignInForm from "@/components/custom/SignInForm";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   return (
@@ -20,9 +22,9 @@ const SignIn = () => {
         <Button
           variant={"outline"}
           className="w-full"
-          onClick={async () => {
-            "use server";
-            await signIn("github", { redirectTo: "/" });
+          onClick={() => {
+            signIn("github", { redirectTo: "/" });
+            toast.success("Bạn đang đăng nhập bằng github");
           }}
         >
           <Image
@@ -35,10 +37,10 @@ const SignIn = () => {
         <Button
           variant={"outline"}
           className="w-full"
-          // onClick={() => {
-          //   //   "use server";
-          //   // signIn("github", { redirectTo: "/" });
-          // }}
+          onClick={() => {
+            signIn("google", { redirectTo: "/" });
+            toast.success("Bạn đang đăng nhập bằng google");
+          }}
         >
           <Image
             src={"/icons/google.png"}

@@ -8,7 +8,7 @@ const NewItemCard = () => {
         <Image
           src={"/images/new.png"}
           alt="pro"
-          layout="relative"
+          className="w-auto h-auto"
           width={1000}
           height={1000}
         ></Image>

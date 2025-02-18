@@ -10,7 +10,6 @@ const Hero = () => {
         <Image
           src={"/images/splash2.jpg"}
           alt="splash"
-          layout="responsive"
           width={1900}
           height={1650}
           priority

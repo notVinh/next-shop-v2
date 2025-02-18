@@ -15,7 +15,7 @@ const CustomSlider = () => {
         {wallImgList.map((item: string) => (
           <Image
             key={item}
-            className=""
+            className="w-auto h-auto"
             src={`/images/${item}.jpg`}
             alt={item}
             width={400}

@@ -6,7 +6,7 @@ const RecommendedCard = () => {
   return (
     <div className="relative">
       <Image
-        className="rounded-2xl"
+        className="rounded-2xl h-auto w-auto"
         src={"/images/mansplash.png"}
         alt="pro"
         width={500}

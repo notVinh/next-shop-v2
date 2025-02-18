@@ -70,6 +70,7 @@ export function NavMenu() {
                     href="/"
                   >
                     <Image
+                      className="w-auto h-auto"
                       src={"/logo.png"}
                       alt="logo"
                       width={30}

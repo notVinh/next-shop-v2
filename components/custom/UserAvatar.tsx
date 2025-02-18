@@ -8,26 +8,44 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "@/auth";
+import { UserPropTypes } from "@/constant/type";
+import { signOut } from "next-auth/react";
+import useUser from "@/lib/zustand/useUser";
+import axios from "axios";
+import toast from "react-hot-toast";
+import Link from "next/link";
 
-const UserAvatar = ({ avatarImg }: { avatarImg?: string }) => {
+const UserAvatar = ({ data }: { data?: UserPropTypes }) => {
+  const { clearUser } = useUser();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Avatar className="w-10 h-10 cursor-pointer">
-          <AvatarImage alt="avatar" src={avatarImg} />
+          <AvatarImage
+            alt="avatar"
+            src={data?.avatar ? data?.avatar : "/icons/defaultavatar.png"}
+          />
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={"/profile"}>Profile</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem>Billing</DropdownMenuItem>
         <DropdownMenuItem>Team</DropdownMenuItem>
         <DropdownMenuItem
           onClick={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
+            clearUser();
+            if (data?.loginMethod === "normal") {
+              await axios.post("/api/user/logout");
+              // console.log("dang xuat ne");
+            } else {
+              signOut();
+            }
+            toast.success("Bạn đã đăng xuất thành công");
           }}
         >
           Log Out

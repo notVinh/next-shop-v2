@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
+import useUser from "@/lib/zustand/useUser";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -22,6 +23,8 @@ const formSchema = z.object({
 });
 const SignInForm = () => {
   const router = useRouter();
+
+  const { setUser } = useUser();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,20 +40,18 @@ const SignInForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // console.log(values);
-    const userData = await axios.post("/api/user/signin", values);
+    const userData = await axios.post("/api/auth", values);
 
-    if (userData.data.auth === true && userData.data.user.isAdmin === false) {
-      // console.log(userData.data.user);
+    if (userData.data.success) {
       const userJSON = JSON.stringify(userData.data.user);
       localStorage.setItem("user", userJSON);
-      toast.success(userData.data.msg);
+      await setUser({
+        loginMethod: "normal",
+        email: userData.data.user.email,
+        name: userData.data.user.name,
+      });
       router.push("/");
-    } else if (
-      userData.data.auth === true &&
-      userData.data.user.isAdmin === true
-    ) {
-      toast.success("Bạn đang đăng nhập với tư cách admin");
-      router.push("/admin");
+      toast.success(userData.data.msg);
     } else {
       toast.error(userData.data.msg);
     }

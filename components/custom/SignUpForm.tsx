@@ -16,6 +16,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
+import useUser from "@/lib/zustand/useUser";
+
 const formSchema = z.object({
   firstname: z.string().min(2).max(50),
   lastname: z.string().min(2).max(50),
@@ -31,6 +33,7 @@ const formSchema = z.object({
     }),
 });
 const SignUpForm = () => {
+  const { setUser } = useUser();
   const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,11 +51,19 @@ const SignUpForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // console.log(values);
-    const userData = await axios.post("/api/user/signup", values);
+    const userData = await axios.post("/api/user/signup", {
+      ...values,
+      name: values.firstname + values.lastname,
+    });
     if (userData.data.success === true) {
       // console.log(userData.data.user);
       const userJSON = JSON.stringify(userData.data.user);
       localStorage.setItem("user", userJSON);
+      await setUser({
+        loginMethod: "normal",
+        email: userData.data.user.email,
+        name: userData.data.user.name,
+      });
       toast.success(userData.data.msg);
       router.push("/");
     } else {

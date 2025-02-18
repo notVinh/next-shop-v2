@@ -7,9 +7,9 @@ const TrendingCard = () => {
     <div className="relative">
       <div className="w-96 h-96 overflow-hidden rounded-2xl">
         <Image
+          className="w-auto h-auto"
           src={"/images/new.png"}
           alt="pro"
-          layout="relative"
           width={1000}
           height={1000}
         ></Image>
