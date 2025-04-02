@@ -1,10 +1,10 @@
-import connectToDatabase from "@/lib/config/db";
+import connect from "@/lib/config/db";
 import UserModel from "@/lib/models/userModel";
 import { NextResponse } from "next/server";
-import { hashPassword } from "@/lib/bcypt/index";
+// import { hashPassword } from "@/lib/bcypt/index";
 
 const loadDB = async () => {
-  await connectToDatabase();
+  await connect();
 };
 loadDB();
 
@@ -27,11 +27,12 @@ export async function POST(req: Request) {
       msg: `${email} đã tồn tại`,
     });
   } else {
-    const hashedPassword = await hashPassword(password);
+    // const hashedPassword = await hashPassword(password);
     const newUser = await UserModel.create({
       email,
       name,
-      password: hashedPassword,
+      password,
+      // password: hashedPassword,
     });
     return NextResponse.json({
       success: true,

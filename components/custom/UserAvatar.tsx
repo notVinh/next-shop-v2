@@ -8,23 +8,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { UserPropTypes } from "@/constant/type";
 import { signOut } from "next-auth/react";
 import useUser from "@/lib/zustand/useUser";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Link from "next/link";
 
-const UserAvatar = ({ data }: { data?: UserPropTypes }) => {
-  const { clearUser } = useUser();
+const UserAvatar = () => {
+  const { clearUser, user } = useUser();
+
+  // console.log(user);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <Avatar className="w-10 h-10 cursor-pointer">
+        <Avatar className="w-16 h-16 cursor-pointer md:w-10 md:h-10">
           <AvatarImage
             alt="avatar"
-            src={data?.avatar ? data?.avatar : "/icons/defaultavatar.png"}
+            src={user?.avatar ? user?.avatar : "/icons/defaultavatar.png"}
           />
         </Avatar>
       </DropdownMenuTrigger>
@@ -39,7 +40,7 @@ const UserAvatar = ({ data }: { data?: UserPropTypes }) => {
         <DropdownMenuItem
           onClick={async () => {
             clearUser();
-            if (data?.loginMethod === "normal") {
+            if (user?.loginMethod === "normal") {
               await axios.post("/api/user/logout");
               // console.log("dang xuat ne");
             } else {

@@ -18,7 +18,7 @@ const FilterSelect = ({
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  console.log(filterItem);
+  // console.log(filterItem);
   return (
     <div className="space-x-4">
       <Collapsible>

@@ -2,27 +2,27 @@ import useProduct from "@/lib/zustand/useProduct";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useGetPro = (page: number) => {
+const useGetProductInfo = (id: string) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { setProduct } = useProduct();
+  const [product, setProduct] = useState();
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`/api/product`);
-      setProduct(response.data);
+      const response = await axios.get(`/api/product/${id}`);
+      setProduct(response.data.product);
       setIsLoading(false);
-      return response.data;
+      // return response.data;
     } catch (error) {
       console.log(error);
-      return [];
+      // return [];
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [page]);
+  }, []);
 
-  return { isLoading };
+  return { isLoading, product };
 };
 
-export default useGetPro;
+export default useGetProductInfo;

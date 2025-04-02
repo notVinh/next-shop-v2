@@ -1,9 +1,16 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
-const NewItemCard = () => {
+export default function NewItemCard() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
       <div className="w-96 h-96 overflow-hidden rounded-2xl">
         <Image
           src={"/images/new.png"}
@@ -18,8 +25,6 @@ const NewItemCard = () => {
         <div className="text-xs text-gray-400">Slim-Fit Strip</div>
         <div className="font-bold">$65</div>
       </div>
-    </div>
+    </motion.div>
   );
-};
-
-export default NewItemCard;
+}

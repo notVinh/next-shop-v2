@@ -1,14 +1,9 @@
-import React from "react";
-import FilterSelect from "./custom/FilterSelect";
-import { Separator } from "./ui/separator";
+import FilterBar from "./custom/FilterBar";
 
 const SideBar = () => {
   return (
-    <div className="w-1/5 bg-white rounded-xl h-screen p-3">
-      <FilterSelect title="Catelogy" catItem={["Man", "Women", "Kid"]} />
-      <Separator />
-      <FilterSelect title="Catelogy" catItem={["Man", "Women", "Kid"]} />
-      <Separator />
+    <div className="hidden md:block md:w-1/5 h-full ">
+      <FilterBar />
     </div>
   );
 };

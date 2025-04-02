@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative border-b-2 md:border-b-0 m-2 pb-10 md:pb-5">
-      <div className="h-[250px] md:w-full md:h-[650px] overflow-hidden rounded-2xl   ">
+    <div className="relative border-b-2 md:border-b-0 m-2 pb-10 pt-2 md:pb-5">
+      <div className="h-[250px] md:w-full md:h-[650px] overflow-hidden rounded-xl  ">
         <Image
           src={"/images/splash2.jpg"}
           alt="splash"

@@ -1,9 +1,9 @@
-import connectToDatabase from "@/lib/config/db";
+import connect from "@/lib/config/db";
 import ProductModel from "@/lib/models/productModel";
 import { NextResponse } from "next/server";
 
 const loadDB = async () => {
-  await connectToDatabase();
+  await connect();
 };
 loadDB();
 

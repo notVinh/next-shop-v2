@@ -1,5 +1,6 @@
 import React from "react";
 import TrendingCard from "./custom/TrendingCard";
+import HeaderSection from "./custom/HeaderSection";
 
 const TrendingSection = () => {
   return (
@@ -12,11 +13,12 @@ const TrendingSection = () => {
           loop
         ></video>
       </div>
-      <div className="uppercase font-bold text-4xl underline">New Trending</div>
-      <div className="text-center text-gray-500">
-        Alway update your style with <span>latest version</span>
-      </div>
-      <div className="flex flex-row w-full p-2 justify-evenly mt-4 flex-wrap gap-5 md:gap-0">
+      <HeaderSection
+        title="New Trending"
+        desc="Alway update your style with latest version"
+      />
+
+      <div className="flex flex-row w-full p-2 justify-evenly mt-4 md:flex-wrap gap-2 md:gap-0 overflow-scroll md:overflow-auto">
         <TrendingCard />
         <TrendingCard />
         <TrendingCard />

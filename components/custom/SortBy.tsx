@@ -13,7 +13,7 @@ import { ChevronDown } from "lucide-react";
 const SortBy = ({ data }: { data: string[] }) => {
   const [isChoose, setIsChoose] = useState(data[0]);
   return (
-    <div>
+    <div className="w-full">
       SortBy:{" "}
       <DropdownMenu>
         <DropdownMenuTrigger>

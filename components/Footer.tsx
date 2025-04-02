@@ -5,7 +5,13 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="rounded-xl bg-white w-full flex flex-col justify-between gap-3">
+    <div
+      // initial={{ opacity: 0, scale: 0.5 }}
+      // whileInView={{ opacity: 1, scale: 1 }}
+      // transition={{ duration: 1.2, ease: "easeOut" }}
+      // viewport={{ once: true }}
+      className="rounded-xl bg-white w-full flex flex-col justify-between gap-3"
+    >
       <div className="mt-3 flex flex-col md:flex-row justify-center items-center gap-10 md:gap-40">
         <div className="w-1/3 flex flex-col justify-center items-center gap-5">
           <Image
@@ -20,8 +26,8 @@ const Footer = () => {
               Get newletter update for upcoming product and{" "}
               <span>best discount for all item</span>
             </div>
-            <div className="flex flex-row gap-3">
-              <Input className="rounded-full w-60"></Input>
+            <div className="flex flex-row gap-3 w-full">
+              <Input className="rounded-full w-60 flex-1"></Input>
               <Button className="rounded-full">Submit</Button>
             </div>
           </div>
