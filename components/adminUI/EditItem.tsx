@@ -40,7 +40,7 @@ export function EditItem({ data }: { data: ItemData }) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(formData);
+    console.log(formData);
   };
 
   return (
