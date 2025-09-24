@@ -15,7 +15,7 @@ const SortBy = ({ data }: { data: string[] }) => {
   return (
     <div className="w-full">
       SortBy:{" "}
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
           <div className="w-44 flex mx-2 border rounded-sm p-1">
             {isChoose}

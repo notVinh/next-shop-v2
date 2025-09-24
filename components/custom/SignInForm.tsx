@@ -8,14 +8,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
-import useUser from "@/lib/zustand/useUser";
+import { userStore } from "@/lib/zustand/store";
+import { loginAccount } from "@/services/queries/userQueries";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -24,7 +24,7 @@ const formSchema = z.object({
 const SignInForm = () => {
   const router = useRouter();
 
-  const { setUser } = useUser();
+  const { setUser } = userStore();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,20 +40,19 @@ const SignInForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // console.log(values);
-    const userData = await axios.post("/api/auth", values);
+    const res = await loginAccount(values);
 
-    if (userData.data.success) {
-      const userJSON = JSON.stringify(userData.data.user);
-      localStorage.setItem("user", userJSON);
-      await setUser({
-        loginMethod: "normal",
-        email: userData.data.user.email,
-        name: userData.data.user.name,
+    if (res.success) {
+      setUser({
+        method: "default",
+        email: res.user.email,
+        name: res.user.name,
+        image: res.user.image,
       });
       router.push("/");
-      toast.success(userData.data.msg);
+      toast.success(res.msg);
     } else {
-      toast.error(userData.data.msg);
+      toast.error(res.msg);
     }
   }
   return (

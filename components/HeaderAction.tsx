@@ -1,30 +1,21 @@
-import React, { useEffect } from "react";
+"use client";
+import React from "react";
 import UserAvatar from "./custom/UserAvatar";
 import { Button } from "./ui/button";
-import useUser from "@/lib/zustand/useUser";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import UserAction from "./custom/UserAction";
+import { userStore } from "@/lib/zustand/store";
+import ButtonCircle from "./custom/ButtonCircle";
 
 const HeaderAction = () => {
-  const { setUser, user } = useUser();
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    if (session) {
-      setUser({
-        name: session.user?.name || "",
-        email: session.user?.email || "",
-        avatar: session.user?.image || "",
-        loginMethod: "OAuth",
-      });
-    }
-  }, [session, setUser]);
+  const { user } = userStore();
   return (
     <div className="w-1/3 hidden md:flex justify-end items-center gap-5">
       <UserAction />
       {user ? (
-        <UserAvatar />
+        <ButtonCircle>
+          <UserAvatar />
+        </ButtonCircle>
       ) : (
         <Link href={"/sign-in"}>
           <Button variant={"outline"} className="font-semibold">

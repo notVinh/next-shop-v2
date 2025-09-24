@@ -1,23 +1,21 @@
 import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
+  brand: { type: String },
   id: { type: Number, required: true },
+  type: { type: String },
+  status: { type: String },
+  price: { type: Number },
+  amount: { type: Number },
   name: { type: String, required: true },
-  brand: { type: String, required: true },
-  type: { type: String, required: true },
-  price: { type: Number, required: true },
+  gentle: { type: String, default: "unisex" },
+  image: { type: String },
+  subimage: { type: [String] },
   size: { type: [String] },
   color: { type: [String] },
   desc: { type: String },
-  status: { type: String, required: true },
-  img: { type: String },
-  img1: { type: String },
-  img2: { type: String },
-  img3: { type: String },
-  img4: { type: String },
-  img5: { type: String },
-  img6: { type: String },
-  img7: { type: String },
+  instock: { type: Boolean, default: true },
+  active: { type: Boolean, default: false },
 });
 
 const ProductModel =

@@ -1,34 +1,41 @@
+"use client";
 import React from "react";
 import {
   Carousel,
   CarouselContent,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselItem,
 } from "@/components/ui/carousel";
-import { wallImgList } from "@/lib/utils";
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 
-const CustomSlider = () => {
+const CustomSlider = ({ data }: { data: string[] }) => {
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
   return (
-    <Carousel className="w-96 rounded-3xl m-3 overflow-hidden cursor-move">
-      <CarouselContent>
-        {wallImgList.map((item: string) => (
-          <Image
-            key={item}
-            className="w-auto h-auto"
-            src={`/images/${item}.jpg`}
-            alt={item}
-            width={400}
-            height={400}
-          ></Image>
-        ))}
-        {/* <CarouselItem>Vinh</CarouselItem>
-        <CarouselItem>Hihi</CarouselItem>
-        <CarouselItem>dadadadas</CarouselItem> */}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+    <div className=" h-[34rem] w-full overflow-hidden relative">
+      <Carousel
+        plugins={[plugin.current]}
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
+      >
+        <CarouselContent>
+          {data.map((img, index) => (
+            <CarouselItem key={index}>
+              <div className="bg-black h-[35rem] overflow-hidden">
+                <Image
+                  src={img}
+                  alt="1"
+                  width={500}
+                  height={500}
+                  priority
+                ></Image>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
   );
 };
 

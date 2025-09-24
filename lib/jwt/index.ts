@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-export const generateToken = async (userId) => {
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+export const generateToken = async (userId: string, role: string) => {
+  const token = jwt.sign({ userId, role }, process.env.JWT_SECRET as string, {
     expiresIn: "30d",
   });
 
@@ -22,7 +22,7 @@ export const authToken = async () => {
 
   if (token) {
     try {
-      const decoded = jwt.verify(token.value, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token.value, process.env.JWT_SECRET as string);
 
       return { message: "Authorized", user: decoded };
     } catch (err) {

@@ -6,8 +6,24 @@ import { NavMenu } from "./NavMenu";
 import SubNavMenu from "./SubNavMenu";
 import HeaderAction from "./HeaderAction";
 import { motion } from "framer-motion";
+import { userStore } from "@/lib/zustand/store";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
+  const { setUser } = userStore();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      setUser({
+        name: session.user.name || "",
+        email: session.user.email || "",
+        image: session.user.image || "",
+        method: "oauth",
+      });
+    }
+  }, [session, setUser]);
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = () => {
@@ -34,7 +50,7 @@ const Header = () => {
           : { y: 5, opacity: 1, scale: 0.99 }
       }
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`fixed w-full h-16 shadow  flex justify-evenly items-center p-6  bg-white top-0 left-0 right-0 z-50 ${
+      className={`fixed w-full h-16 shadow flex justify-evenly items-center p-6  bg-white top-0 left-0 right-0 z-50 ${
         isScrolled ? "rounded-none" : "rounded-xl"
       }`}
       // className={`flex w-full h-16 shadow justify-between items-center text-xs font-semibold text-gray-600 p-6  bg-white transition-transform duration-300 top-0 left-0 right-0 z-50 ${

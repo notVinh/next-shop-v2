@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/zustand/useUser.js", "lib/zustand/useSortProduct.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/zustand/useUserStore.ts", "lib/zustand/sortStore.js", "lib/zustand/useCartStore.ts", "lib/config/db.js"],
   "exclude": ["node_modules"]
 }

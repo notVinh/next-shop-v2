@@ -5,7 +5,7 @@ import TrendingSection from "@/components/TrendingSection";
 
 export default function Home() {
   return (
-    <main className="rounded-xl bg-white w-full min-h-80">
+    <div className="rounded-xl bg-white w-full min-h-80">
       <section className="mb-10 md:mb-32">
         <Hero />
       </section>
@@ -14,6 +14,6 @@ export default function Home() {
         <TrendingSection />
         <RecommendedSection />
       </div>
-    </main>
+    </div>
   );
 }

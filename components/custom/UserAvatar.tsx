@@ -9,27 +9,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import useUser from "@/lib/zustand/useUser";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { userStore } from "@/lib/zustand/store";
+import { clearCookies } from "@/services/queries/userQueries";
 
 const UserAvatar = () => {
-  const { clearUser, user } = useUser();
-
-  // console.log(user);
+  const { clearUser, user } = userStore();
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="outline-none">
-        <Avatar className="w-16 h-16 cursor-pointer md:w-10 md:h-10">
+        <Avatar className="w-16 h-16 cursor-pointer md:w-10 md:h-10 flex items-center justify-center">
           <AvatarImage
             alt="avatar"
-            src={user?.avatar ? user?.avatar : "/icons/defaultavatar.png"}
+            src={user?.image ? user?.image : "/icons/defaultavatar.png"}
+            className="w-7 h-7"
           />
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent align="start" alignOffset={-65}>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
@@ -40,9 +39,10 @@ const UserAvatar = () => {
         <DropdownMenuItem
           onClick={async () => {
             clearUser();
-            if (user?.loginMethod === "normal") {
-              await axios.post("/api/user/logout");
-              // console.log("dang xuat ne");
+            if (user?.method === "default") {
+              await clearCookies();
+              clearUser();
+              toast.success("Bạn đã đăng xuất thành công");
             } else {
               signOut();
             }

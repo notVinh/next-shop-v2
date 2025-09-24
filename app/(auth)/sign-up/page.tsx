@@ -1,4 +1,3 @@
-"use client";
 import SignUpForm from "@/components/custom/SignUpForm";
 import React from "react";
 
@@ -8,7 +7,6 @@ const SignUp = () => {
       <div className="w-full text-4xl font-bold text-gray-500">
         Create an account
       </div>
-
       <SignUpForm />
     </div>
   );

@@ -2,13 +2,11 @@
 import React from "react";
 import { Search, X } from "lucide-react";
 import SortBy from "@/components/custom/SortBy";
-import useSortProduct from "@/lib/zustand/useSortProduct";
+import useSortStore from "@/lib/zustand/sortStore";
 import { motion } from "framer-motion";
 
 const SortNavProduct = () => {
-  const { filterItem, removeFilterItem } = useSortProduct();
-
-  //   console.log(filterItem);
+  const { filterItem, removeFilterItem } = useSortStore();
 
   return (
     <div className="min-h-10 w-full bg-white rounded-xl md:mb-1 p-5 transition-transform duration-300 hidden md:block">

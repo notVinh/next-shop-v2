@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,11 +13,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-
-import useUser from "@/lib/zustand/useUser";
+import { userStore } from "@/lib/zustand/store";
+import { signupAccount } from "@/services/queries/userQueries";
+import OtpForm from "./OtpForm";
 
 const formSchema = z.object({
   firstname: z.string().min(2).max(50),
@@ -33,7 +34,8 @@ const formSchema = z.object({
     }),
 });
 const SignUpForm = () => {
-  const { setUser } = useUser();
+  const { setUser } = userStore();
+  const [open, setOpen] = React.useState(false);
   const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,23 +53,21 @@ const SignUpForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // console.log(values);
-    const userData = await axios.post("/api/user/signup", {
+    const res = await signupAccount({
       ...values,
       name: values.firstname + values.lastname,
     });
-    if (userData.data.success === true) {
-      // console.log(userData.data.user);
-      const userJSON = JSON.stringify(userData.data.user);
-      localStorage.setItem("user", userJSON);
-      await setUser({
-        loginMethod: "normal",
-        email: userData.data.user.email,
-        name: userData.data.user.name,
+    if (res.success === true) {
+      setUser({
+        method: "default",
+        email: res.user.email,
+        name: res.user.name,
+        image: res.user.image,
       });
-      toast.success(userData.data.msg);
-      router.push("/");
+      setOpen(true);
+      // toast.success(res.msg);
     } else {
-      toast.error(userData.data.msg);
+      toast.error(res.msg);
     }
   }
   return (
@@ -157,6 +157,7 @@ const SignUpForm = () => {
           </Button>
         </form>
       </Form>
+      {open && <OtpForm email={form.watch("email")} />}
     </>
   );
 };

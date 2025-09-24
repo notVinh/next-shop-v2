@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Collapsible,
@@ -5,7 +6,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import useSortProduct from "@/lib/zustand/useSortProduct";
+import useSortStore from "@/lib/zustand/sortStore";
 
 const FilterSelect = ({
   title,
@@ -14,7 +15,7 @@ const FilterSelect = ({
   title: string;
   catItem: string[];
 }) => {
-  const { filterItem, addFilterItem, removeFilterItem } = useSortProduct();
+  const { filterItem, addFilterItem, removeFilterItem } = useSortStore();
 
   const [isOpen, setIsOpen] = React.useState(false);
 

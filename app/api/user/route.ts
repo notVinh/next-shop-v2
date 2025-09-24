@@ -3,17 +3,14 @@ import UserModel from "@/lib/models/userModel";
 import { NextResponse } from "next/server";
 // import { hashPassword } from "@/lib/bcypt/index";
 
-const loadDB = async () => {
-  await connect();
-};
-loadDB();
-
 export async function GET() {
+  await connect();
   const data = await UserModel.find();
   return NextResponse.json(data);
 }
 
 export async function POST(req: Request) {
+  await connect();
   const userData = await req.json();
 
   const { email, name, password } = userData;

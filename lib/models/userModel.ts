@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  isAdmin: { type: Boolean, default: false },
+  isVerified: { type: Boolean, default: false },
+  otp: { type: String },
+  expiry: { type: Date },
 });
 
 const UserModel = mongoose.models.user || mongoose.model("user", UserSchema);
