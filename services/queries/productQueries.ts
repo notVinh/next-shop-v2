@@ -1,3 +1,5 @@
+// import ProductModel from "@/lib/models/productModel";
+// import { connectDB } from "@/lib/mongodb/config";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -12,24 +14,22 @@ export const getAllProducts = async () => {
   }
 };
 
-export const getProductById = async (id: string) => {
+export const getProductByIdCSR = async (id: number) => {
   try {
     const response = await axios.get(`${API_URL}/api/product/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
-    return null;
+    // return {};
   }
 };
 
-export const changeActiveProduct = async (id: string) => {
+export const changeActiveProduct = async (id: number) => {
   try {
-    const response = await axios.post(
-      `${API_URL}/api/product/${id}?activechange=true`
-    );
+    const response = await axios.get(`${API_URL}/api/product/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
-    return null;
+    // return {};
   }
 };

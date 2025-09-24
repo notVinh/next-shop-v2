@@ -1,21 +1,21 @@
-import connect from "@/lib/config/db";
+import connectDB from "@/lib/config/db";
 import UserModel from "@/lib/models/userModel";
 import { NextResponse } from "next/server";
 // import { hashPassword } from "@/lib/bcypt/index";
 
 export async function GET() {
-  await connect();
+  await connectDB();
   const data = await UserModel.find();
   return NextResponse.json(data);
 }
 
 export async function POST(req: Request) {
-  await connect();
+  await connectDB();
   const userData = await req.json();
 
   const { email, name, password } = userData;
 
-  console.log(email, name, password);
+  // console.log(email, name, password);
 
   const userExists = await UserModel.findOne({ email });
 

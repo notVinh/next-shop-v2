@@ -15,8 +15,6 @@ export async function POST(req: Request) {
   const data = await getMomoUrl(body.amount, body.redirectUrl);
   // console.log(data);
 
-  console.log(data);
-
   return NextResponse.json(data);
 }
 

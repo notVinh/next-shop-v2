@@ -1,3 +1,5 @@
+import { CartItemPropTypes } from "./type";
+
 export const paymentMethod = [
   { name: "Cash", image: "/icons/producticon.png" },
   { name: "Momo", image: "/icons/momoicon.png" },
@@ -48,8 +50,11 @@ export const generateColor = (color: string) => {
   }
 };
 
-export const getSum = (items: { price: number; amount: number }[]) => {
-  return items.reduce((sum, item) => sum + item.price * item.amount, 0);
+export const getSum = (items: CartItemPropTypes[]) => {
+  return items.reduce(
+    (sum, item) => sum + (item?.price ?? 0) * (item?.amount ?? 0),
+    0
+  );
 };
 
 export const adviceTax = {

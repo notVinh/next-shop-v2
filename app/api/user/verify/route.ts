@@ -1,9 +1,9 @@
-import connect from "@/lib/config/db";
 import UserModel from "@/lib/models/userModel";
+import { connectDB } from "@/lib/mongodb/config";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  await connect();
+  await connectDB();
   const userData = await req.json();
 
   const { email, otp } = userData;

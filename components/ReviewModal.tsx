@@ -33,7 +33,7 @@ const ReviewModal = () => {
         amount: String(total),
         redirectUrl: "http://localhost:3000",
       });
-      console.log(res);
+      // console.log(res);
       if (res.data.payUrl) {
         navigate.replace(res.data.payUrl);
       }

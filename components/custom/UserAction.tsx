@@ -1,3 +1,4 @@
+"use client";
 import React, { memo, useState } from "react";
 import ButtonCircle from "./ButtonCircle";
 import { Heart, Search } from "lucide-react";

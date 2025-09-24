@@ -1,10 +1,10 @@
 import ItemDetail from "@/components/ItemDetail";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { getProductById } from "@/services/queries/productQueries";
+import { getProductById } from "@/services/queries/productQueriesSSR";
 import { CheckCircle2, Star } from "lucide-react";
 import Image from "next/image";
-import { notFound } from "next/navigation"; // Import notFound
+// import { notFound } from "next/navigation"; // Import notFound
 
 const ProductDetail = async ({
   params,
@@ -12,18 +12,23 @@ const ProductDetail = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  let product;
-  try {
-    const res = await getProductById(id); // Chỉ fetch sản phẩm này
-    product = res.product;
-  } catch (error) {
-    console.log(error);
-    notFound();
-  }
 
-  if (!product) {
-    notFound(); // Nếu sản phẩm không tìm thấy hoặc fetch trả về null
-  }
+  const product = await getProductById(id);
+
+  // console.log(product);
+
+  // let product;
+  // try {
+  //   const res = await getProductById(id); // Chỉ fetch sản phẩm này
+  //   product = res.product;
+  // } catch (error) {
+  //   console.log(error);
+  //   notFound();
+  // }
+
+  // if (!product) {
+  //   notFound(); // Nếu sản phẩm không tìm thấy hoặc fetch trả về null
+  // }
 
   return (
     <div className=" bg-white rounded-xl w-full my-2 p-3">

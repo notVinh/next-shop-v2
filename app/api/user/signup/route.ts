@@ -1,11 +1,11 @@
 import { hashPassword } from "@/lib/bcypt";
-import connect from "@/lib/config/db";
 import { mailOptions, transporter } from "@/lib/email/config";
 import UserModel from "@/lib/models/userModel";
+import { connectDB } from "@/lib/mongodb/config";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  await connect();
+  await connectDB();
   const userData = await req.json();
 
   const { email, name, password } = userData;

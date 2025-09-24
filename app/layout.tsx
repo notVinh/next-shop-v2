@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import { connectDB } from "@/lib/mongodb/config";
 
 const latoFont = Lato({
   weight: ["300", "400", "700", "900"],
@@ -24,11 +25,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await connectDB();
   return (
     <html lang="en">
       <body className={`${latoFont.variable} antialiased`}>{children}</body>

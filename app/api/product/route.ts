@@ -1,9 +1,9 @@
-import connect from "@/lib/config/db";
 import ProductModel from "@/lib/models/productModel";
+import { connectDB } from "@/lib/mongodb/config";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  await connect();
+  await connectDB();
   const searchParams = req.nextUrl.searchParams;
   const isActive = searchParams.get("active");
 
@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: Request) {
-  await connect();
+  await connectDB();
   const body = await req.json();
 
   const {

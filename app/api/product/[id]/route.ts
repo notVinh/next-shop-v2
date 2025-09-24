@@ -1,12 +1,12 @@
-import connect from "@/lib/config/db";
 import ProductModel from "@/lib/models/productModel";
+import { connectDB } from "@/lib/mongodb/config";
 import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  await connect();
+  await connectDB();
 
   const productId = Number((await params).id);
 
@@ -28,7 +28,7 @@ export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  await connect();
+  await connectDB();
   const { searchParams } = new URL(request.url);
   // console.log(searchParams);
   const productId = Number((await params).id);

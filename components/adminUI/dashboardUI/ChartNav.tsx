@@ -26,8 +26,6 @@ const chartData = [
   { month: "June", order: 100, product: 600, user: 750 },
 ];
 
-console.log(chartData[chartData.length - 1]["order"]);
-
 const chartConfig = {
   desktop: {
     label: "Desktop",

@@ -24,14 +24,14 @@ export type ProductPropTypes = {
 };
 
 export type CartItemPropTypes = {
-  itemId: number;
-  variantId: string;
+  itemId?: number;
+  variantId?: string;
   image?: string;
   name?: string;
   size?: string | undefined[];
   color?: string | undefined[];
-  amount: number;
-  price: number;
+  amount?: number;
+  price?: number;
 };
 
 export type InfoOrderPropTypes = {

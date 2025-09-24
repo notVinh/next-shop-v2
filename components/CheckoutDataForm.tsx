@@ -33,7 +33,7 @@ const CheckoutDataForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Ngăn trình duyệt reload trang
-    console.log(formData);
+    // console.log(formData);
     setIsOpen(true);
 
     // // Gửi dữ liệu đến API (ví dụ dùng Fetch API)

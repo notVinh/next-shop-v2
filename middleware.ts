@@ -23,15 +23,27 @@
 // middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { jwtVerify } from "jose";
 
-export default function middleware(req: NextRequest) {
+async function verifyToken(token: string) {
+  try {
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const { payload } = await jwtVerify(token, secret);
+    return payload; // { id, role, ... }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export default async function middleware(req: NextRequest) {
+  const cookieStore = await cookies();
   const url = req.nextUrl;
 
   //   if (url.pathname.startsWith("/api") || url.pathname.startsWith("/admin")) {
   if (url.pathname.startsWith("/admin")) {
     const token =
-      req.cookies.get("token")?.value ||
+      cookieStore.get("jwt")?.value ||
       req.headers.get("authorization")?.replace("Bearer ", "");
 
     if (!token) {
@@ -39,10 +51,8 @@ export default function middleware(req: NextRequest) {
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-        role: string;
-      };
-      if (decoded.role !== "admin") {
+      const decoded = await verifyToken(token);
+      if (decoded?.role !== "admin") {
         return NextResponse.json({ message: "Forbidden" }, { status: 403 });
       }
     } catch (err) {

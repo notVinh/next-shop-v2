@@ -1,11 +1,11 @@
 import UserModel from "@/lib/models/userModel";
 import { NextResponse } from "next/server";
-import connect from "@/lib/config/db";
 import { verifyPassword } from "@/lib/bcypt";
 import { generateToken } from "@/lib/jwt";
+import { connectDB } from "@/lib/mongodb/config";
 
 export async function POST(req: Request) {
-  await connect();
+  await connectDB();
   const userData = await req.json();
 
   const { email, password } = userData;

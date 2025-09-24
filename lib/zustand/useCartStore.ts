@@ -30,7 +30,10 @@ export const cartStore = create<CartItem>()(
               cartItem: state.cartItem.map((item) => {
                 // console.log(item);
                 if (item.itemId === id && item.variantId === variantId) {
-                  return { ...item, amount: item.amount + data.amount };
+                  return {
+                    ...item,
+                    amount: (item?.amount ?? 0) + (data?.amount ?? 0),
+                  };
                 }
                 return item;
               }),
@@ -57,7 +60,15 @@ export const cartStore = create<CartItem>()(
                   item.variantId === currentItem.variantId
               );
               if (existItem) {
-                existItem.amount += currentItem.amount;
+                acc = acc.map((item) =>
+                  item.itemId === currentItem.itemId &&
+                  item.variantId === currentItem.variantId
+                    ? {
+                        ...item,
+                        amount: (item.amount ?? 0) + (currentItem.amount ?? 0),
+                      }
+                    : item
+                );
               } else {
                 acc.push(currentItem);
               }

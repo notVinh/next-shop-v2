@@ -14,15 +14,24 @@ const OtpForm = ({ email }: { email: string }) => {
   const router = useRouter();
   const [otp, setOtp] = React.useState("");
   useEffect(() => {
-    const response = verifyAccount({ email, otp });
-    response.then((data) => {
-      if (data && data.success) {
-        router.push("/");
-        toast.success("Xác thực thành công! Bạn sẽ được đưa đến trang chủ.");
-      } else {
-        toast.error(data.msg || "Xác thực thất bại! Vui lòng thử lại.");
-      }
-    });
+    // let isMounted = true;
+    let timer: NodeJS.Timeout;
+    if (otp.length === 6) {
+      timer = setTimeout(async () => {
+        const response = await verifyAccount({ email, otp });
+        if (response && response.success) {
+          router.push("/");
+          toast.success("Xác thực thành công! Bạn sẽ được đưa đến trang chủ.");
+        } else {
+          toast.error(response.msg || "Xác thực thất bại! Vui lòng thử lại.");
+        }
+      }, 500);
+    }
+
+    return () => {
+      // isMounted = false;
+      clearTimeout(timer);
+    };
   }, [otp, email, router]);
   return (
     <div className="fixed top-0 right-0 bottom-0 left-0 z-50 bg-black bg-opacity-80 text-text ">

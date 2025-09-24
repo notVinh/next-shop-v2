@@ -1,3 +1,4 @@
+"use client";
 import {
   Sheet,
   SheetContent,
@@ -18,15 +19,25 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { cartStore, userStore } from "@/lib/zustand/store";
-import { CartItemPropTypes } from "@/constant/type";
+import { CartItemPropTypes, ProductPropTypes } from "@/constant/type";
+import { getProductByIdCSR } from "@/services/queries/productQueries";
 
 const Cart = () => {
   const { clearCart, cartItem } = cartStore();
   const { user } = userStore();
   const [isOpen, setIsOpen] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
-  const [currentData, setCurrentData] =
-    React.useState<CartItemPropTypes | null>(null);
+  const [currentProduct, setcurrentProduct] =
+    React.useState<ProductPropTypes>();
+  const [currentCartItem, setcurrentCartItem] =
+    React.useState<CartItemPropTypes>();
+
+  const getProductDetail = async (item: CartItemPropTypes) => {
+    setOpenEdit(true);
+    setcurrentCartItem(item);
+    const data = await getProductByIdCSR(item?.itemId || 0);
+    setcurrentProduct(data.product);
+  };
 
   return (
     <>
@@ -89,10 +100,7 @@ const Cart = () => {
                           width={10}
                           height={10}
                           className="w-4 h-4 cursor-pointer"
-                          onClick={() => {
-                            setOpenEdit(!openEdit);
-                            setCurrentData(item);
-                          }}
+                          onClick={() => getProductDetail(item)}
                         ></Image>
                       </div>
 
@@ -145,7 +153,8 @@ const Cart = () => {
       {openEdit && (
         <EditItem
           setOpen={(item) => setOpenEdit(item)}
-          currentData={currentData}
+          currentProduct={currentProduct}
+          currentCartItem={currentCartItem}
         />
       )}
     </>
