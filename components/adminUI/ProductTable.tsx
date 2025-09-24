@@ -14,9 +14,11 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import Image from "next/image";
-import { changeActiveProduct } from "@/services/productService";
 import Link from "next/link";
-import { getAllProducts } from "@/services/queries/productQueries";
+import {
+  changeActiveProduct,
+  getAllProducts,
+} from "@/services/queries/productQueries";
 
 export type ProductColType = {
   id: string;

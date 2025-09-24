@@ -2,18 +2,15 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Trash2 } from "lucide-react"; // Import icons mới
 import Link from "next/link";
-import ProductDetail from "@/components/adminUI/ProductDetail";
+// import ProductDetail from "@/components/adminUI/ProductDetail";
 
 // Giao diện cho props của trang
 interface AdminProductDetailPageProps {
-  params: {
-    id: string; // ID của sản phẩm sẽ được truyền từ URL
-  };
+  params: Promise<{ id: string }>;
 }
 
-const AdminProductDetailPage = async ({
-  params,
-}: AdminProductDetailPageProps) => {
+const AdminProductDetailPage = async ({}: // params,
+AdminProductDetailPageProps) => {
   return (
     <div className=" ml-1 p-3 bg-white rounded-lg shadow-md">
       {/* Header và nút quay lại */}
@@ -37,7 +34,7 @@ const AdminProductDetailPage = async ({
         </div>
       </div>
       <Separator className="mb-8" />
-      <ProductDetail id={params.id} />
+      {/* <ProductDetail id={params.id} /> */}
     </div>
   );
 };

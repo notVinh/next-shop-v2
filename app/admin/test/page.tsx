@@ -10,9 +10,7 @@ import Link from "next/link";
 
 // Giao diện cho props của trang
 interface AdminProductDetailPageProps {
-  params: {
-    id: string; // ID của sản phẩm sẽ được truyền từ URL
-  };
+  params: Promise<{ id: string }>;
 }
 
 const AdminProductDetailPage = async ({}: // params

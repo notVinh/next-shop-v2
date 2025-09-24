@@ -4,10 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await connect();
-  const productId = Number(params.id);
+
+  const productId = Number((await params).id);
 
   // const { searchParams } = new URL(request.url);
 
@@ -25,12 +26,12 @@ export async function GET(
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await connect();
   const { searchParams } = new URL(request.url);
   // console.log(searchParams);
-  const productId = Number(params.id);
+  const productId = Number((await params).id);
   const data = await ProductModel.findOne({ id: productId });
   // console.log(data);
   if (searchParams.get("activechange")) {

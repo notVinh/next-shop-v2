@@ -21,3 +21,15 @@ export const getProductById = async (id: string) => {
     return null;
   }
 };
+
+export const changeActiveProduct = async (id: string) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/product/${id}?activechange=true`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

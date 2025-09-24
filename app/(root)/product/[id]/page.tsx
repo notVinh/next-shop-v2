@@ -6,7 +6,11 @@ import { CheckCircle2, Star } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation"; // Import notFound
 
-const ProductDetail = async ({ params }: { params: { id: string } }) => {
+const ProductDetail = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const { id } = await params;
   let product;
   try {

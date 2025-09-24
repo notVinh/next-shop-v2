@@ -23,7 +23,7 @@ const OtpForm = ({ email }: { email: string }) => {
         toast.error(data.msg || "Xác thực thất bại! Vui lòng thử lại.");
       }
     });
-  }, [otp, email]);
+  }, [otp, email, router]);
   return (
     <div className="fixed top-0 right-0 bottom-0 left-0 z-50 bg-black bg-opacity-80 text-text ">
       <div className="w-72 h-72 bg-white absolute m-auto inset-0 flex flex-col justify-between items-center rounded-lg p-5">
